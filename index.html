@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        background-color: rgb(217, 222, 222);
+        border-radius: 50%;
+        box-shadow: 5px 5px 25px -5px rgb(50, 51, 51);
+      }
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 25%;
+        height: 50vh;
+        background-color: #a5bbdd;
+        border-radius: 50%;
+        box-shadow: 5px 5px 25px -5px rgb(50, 51, 51);
+      }
+
+      i {
+        font-size: 25px;
+        margin-right: 10px;
+        color: #f5c843;
+      }
+      #date {
+        margin: 4px 0;
+      }
+
+      .info {
+        margin-top: 10%;
+      }
+
+      .info .temp {
+        font-size: 30px;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .info h3 {
+        font-size: 15px;
+        font-weight: 400;
+      }
+    </style>
+
+    <title>nodeWeather</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div id="weatherCondition">
+          <i class="fas fa-sun"></i>
+        </div>
+
+        <div class="info">
+          <h2 class="location">
+            <i class="fa-solid fa-street-view"></i>{%city%}, {%country%}
+          </h2>
+          <p id="date">WED | OCT 24 | 3:28 pm</p>
+          <h1 class="temp">{%temp%}&deg;C</h1>
+          <h3 class="tempmin_max">
+            Min {%tempMin%}&deg;C | Max {%tempMax%}&deg;C
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- javaScript -->
+    <script>
+      let curDate = document.getElementById('date');
+      let weatherCondition = document.getElementById('weatherCondition');
+
+      let tempStatus = '{%tempCondition%}';
+      if (tempStatus == 'Sunny') {
+        weatherCondition.innerHTML = '<i class="fas fa-sun"></i>';
+      } else if (tempStatus == 'Clouds') {
+        weatherCondition.innerHTML = '<i class="fas fa-cloud"></i>';
+      } else if (tempStatus == 'Rainy') {
+        weatherCondition.innerHTML = '<i class="fas fa-cloud-rain"></i>';
+      } else {
+        weatherCondition.innerHTML = '<i class="fa-solid fa-street-view"></i>';
+      }
+
+      const getCurrentDay = () => {
+        let weekDay = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const d = new Date();
+        let day = weekDay[d.getDay()];
+        return day;
+      };
+
+      const getCurrentDate = () => {
+        let months = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+
+        const t = new Date();
+        let date = t.getDate();
+        let month = months[t.getMonth()];
+
+        let hour = t.getHours();
+        let minute = t.getMinutes();
+
+        let period = 'AM';
+
+        if (hour > 11) {
+          period = 'PM';
+
+          if (hour > 11) {
+            hour -= 12;
+          }
+        }
+        if (minute < 10) {
+          minute = '0' + minute;
+        }
+
+        return `${month} ${date} | ${hour}:${minute} ${period}`;
+      };
+
+      curDate.innerHTML= `${getCurrentDay()} | ${getCurrentDate()}`;
+    </script>
+  </body>
+</html>

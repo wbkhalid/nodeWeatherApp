@@ -1,0 +1,22 @@
+{
+  "name": "nodeweatherapp",
+  "version": "1.0.0",
+  "description": "Node Weather App",
+  "main": "index1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbkhalid/nodeWeatherApp.git"
+  },
+  "author": "WBkhalid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wbkhalid/nodeWeatherApp/issues"
+  },
+  "homepage": "https://github.com/wbkhalid/nodeWeatherApp#readme",
+  "dependencies": {
+    "requests": "^0.3.0"
+  }
+}
